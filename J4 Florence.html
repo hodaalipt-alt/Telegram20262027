@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>j4-florence - Telegram Group Access</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pink-primary: #ff85a2;
+            --pink-soft: #fbb1bd;
+            --pink-light: #ffe5ec;
+            --blue-soft: #a2d2ff;
+            --blue-light: #e8f4f8;
+            --yellow-soft: #ffea00;
+            --yellow-pastel: #fffae6;
+            --text-color: #4a4e69;
+            --card-bg: rgba(255, 255, 255, 0.92);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--blue-light) 50%, var(--yellow-pastel) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .shape-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--pink-soft);
+            top: 10%;
+            left: 10%;
+        }
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--blue-soft);
+            bottom: 10%;
+            right: 10%;
+        }
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--yellow-soft);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(255, 133, 162, 0.2);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+        }
+
+        .school-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #d63384, #0d6efd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            color: var(--pink-primary);
+            font-size: 18px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 4px rgba(255, 133, 162, 0.25);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--pink-primary) 0%, #f72585 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 15px rgba(247, 37, 133, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(247, 37, 133, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .alert-message {
+            margin-top: 20px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .alert-danger {
+            background-color: #ffe5e5;
+            color: #d63384;
+            border: 1px solid #ffccd5;
+        }
+
+        .alert-success {
+            background-color: #e8f8f5;
+            color: #0d9488;
+            border: 1px solid #ccfbf1;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: #e8f8f5;
+            color: #0d9488;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="container">
+        <!-- School Logo -->
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Girls School Logo" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #ffb6c1;">
+        </div>
+
+        <!-- School Name -->
+        <h1 class="school-title">New Sidi Gaber Language School Ring Road for Girls</h1>
+        <p class="subtitle">Please enter your daughter's National ID to access the Junior 4 Florence official Telegram group.</p>
+
+        <!-- Search Form -->
+        <form id="accessForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-id-card input-icon"></i>
+                    <input type="text" id="nationalIdInput" class="form-control" placeholder="Enter National ID" maxlength="14" required>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">
+                <span id="btnText">Submit & Join Group</span>
+                <i id="btnIcon" class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+
+        <!-- Feedback Messages -->
+        <div id="alertBox" class="alert-message alert-danger">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="alertText">The National ID entered is invalid or not registered in Junior 4.</span>
+        </div>
+
+        <div id="statusBadge" class="status-badge">
+            <i class="fa-solid fa-circle-check"></i> Connected to Live Database
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbww0ao_uPex7VF9LkaoMTaQfMB4J6yoMsKO-Pf1l0yoz_FeUWxmgBcQ3g9__C6Qfm5XUA/exec";
+        const TELEGRAM_GROUP_LINK = "https://t.me/+o6kKvofr7PlmN2Jk";
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const inputId = document.getElementById('nationalIdInput').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+
+            if (!inputId) return;
+
+            // تغيير حالة الزرار أثناء التحقق
+            submitBtn.disabled = true;
+            btnText.textContent = "Verifying...";
+            btnIcon.className = "fa-solid fa-spinner fa-spin";
+            hideAlert();
+
+            try {
+                const response = await fetch(`${API_URL}?id=${encodeURIComponent(inputId)}`);
+                const data = await response.json();
+
+                if (data.status === "SUCCESS") {
+                    showAlert("National ID verified successfully! Redirecting to Telegram...", true);
+                    setTimeout(() => {
+                        window.location.href = TELEGRAM_GROUP_LINK;
+                    }, 1200);
+
+                } else if (data.status === "ALREADY_USED") {
+                    showAlert("Access Denied: This National ID has already been used to join!", false);
+                    resetButton();
+                } else {
+                    showAlert("Access Denied: The National ID entered is invalid or not registered in Junior 4.", false);
+                    resetButton();
+                }
+
+            } catch (error) {
+                console.error("Validation Error:", error);
+                showAlert("Connection Error: Unable to verify National ID right now. Please try again.", false);
+                resetButton();
+            }
+        }
+
+        function showAlert(message, isSuccess) {
+            const alertBox = document.getElementById('alertBox');
+            const alertText = document.getElementById('alertText');
+
+            alertText.textContent = message;
+            alertBox.style.display = 'flex';
+
+            if (isSuccess) {
+                alertBox.className = "alert-message alert-success";
+            } else {
+                alertBox.className = "alert-message alert-danger";
+            }
+        }
+
+        function hideAlert() {
+            document.getElementById('alertBox').style.display = 'none';
+        }
+
+        function resetButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+
+            submitBtn.disabled = false;
+            btnText.textContent = "Submit & Join Group";
+            btnIcon.className = "fa-solid fa-paper-plane";
+        }
+    </script>
+</body>
+</html>

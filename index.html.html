@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Sidi Gaber Language School Ring Road for Girls - Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pink-primary: #ff85a2;
+            --pink-soft: #fbb1bd;
+            --pink-light: #ffe5ec;
+            --blue-soft: #a2d2ff;
+            --blue-light: #e8f4f8;
+            --text-color: #4a4e69;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--blue-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(255, 133, 162, 0.25);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border: 2px solid #fff;
+        }
+
+        .logo-wrapper {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--pink-soft);
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .school-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #d63384, #0d6efd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--pink-primary);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-card {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            padding: 15px 10px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-card i {
+            font-size: 20px;
+            color: var(--pink-primary);
+        }
+
+        .btn-card:hover {
+            border-color: var(--pink-primary);
+            background: var(--pink-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 133, 162, 0.2);
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #6c757d;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .back-btn:hover {
+            color: var(--pink-primary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Girls School Logo">
+        </div>
+
+        <h1 class="school-title">New Sidi Gaber Language School Ring Road for Girls</h1>
+        <p class="subtitle">Official Student Telegram Group Verification Portal</p>
+
+        <!-- 1. اختيار المرحلة الأساسية -->
+        <div id="stageSection">
+            <div class="step-title"><i class="fa-solid fa-layer-group"></i> Select Educational Stage</div>
+            <div class="grid-container">
+                <button class="btn-card" onclick="selectStage('junior')">
+                    <i class="fa-solid fa-child"></i> Junior Stage
+                </button>
+                <button class="btn-card" onclick="selectStage('middle')">
+                    <i class="fa-solid fa-user-graduate"></i> Middle Stage
+                </button>
+                <button class="btn-card" onclick="selectStage('senior')">
+                    <i class="fa-solid fa-school"></i> Senior Stage
+                </button>
+            </div>
+        </div>
+
+        <!-- 1.5. اختيار المستوى الفرعي (خاص بـ Junior Stage) -->
+        <div id="subStageSection" class="hidden">
+            <div class="step-title"><i class="fa-solid fa-sitemap"></i> Select Level</div>
+            <div class="grid-container">
+                <button class="btn-card" onclick="selectSubStage('lower')">
+                    <i class="fa-solid fa-shapes"></i> Lower Junior
+                </button>
+                <button class="btn-card" onclick="selectSubStage('upper')">
+                    <i class="fa-solid fa-cubes"></i> Upper Junior
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. اختيار الصف الدراسي -->
+        <div id="gradeSection" class="hidden">
+            <div class="step-title" id="gradeTitle"><i class="fa-solid fa-graduation-cap"></i> Select Grade</div>
+            <div class="grid-container" id="gradeContainer">
+                <!-- سيتم ملئ الصفوف بالـ JS -->
+            </div>
+        </div>
+
+        <!-- 3. اختيار الفصل -->
+        <div id="classSection" class="hidden">
+            <div class="step-title" id="classTitle"><i class="fa-solid fa-users-rectangle"></i> Select Class</div>
+            <div class="grid-container" id="classContainer">
+                <!-- سيتم ملئ الفصول بالـ JS -->
+            </div>
+        </div>
+
+        <button id="backBtn" class="back-btn" onclick="goBack()">
+            <i class="fa-solid fa-arrow-left"></i> Back to previous step
+        </button>
+    </div>
+
+    <script>
+        // التقسيم القياسي للفصول الثلاثة العادية
+        const standardClasses = [
+            { name: "Milano", url: "#" },
+            { name: "Geneve", url: "#" },
+            { name: "Florence", url: "#" }
+        ];
+
+        // التقسيم الخاص بـ Lower Junior (J1, J2, J3)
+        const lowerJuniorClasses = (prefix) => [
+            { name: "Cookies", url: `${prefix} Cookies.html` },
+            { name: "Jello", url: `${prefix} Jello.html` },
+            { name: "Muffins", url: `${prefix} Muffins.html` }
+        ];
+
+        // هيكل البيانات والروابط لكل مرحلة وصف وفصل
+        const schoolData = {
+            junior: {
+                name: "Junior Stage",
+                subStages: {
+                    lower: {
+                        name: "Lower Junior",
+                        grades: {
+                            "Junior 1": [
+                                { name: "Cookies", url: "J1 Cookies.html" },
+                                { name: "Jello", url: "J2 Jello.html" },
+                                { name: "Muffins", url: "J2 Muffins.html" }
+                            ],
+                            "Junior 2": [
+                                { name: "Cookies", url: "J2 Cookies.html" },
+                                { name: "Jello", url: "J1 Jello.html" },
+                                { name: "Muffins", url: "J1 Muffins.html" }
+                            ],
+                            "Junior 3": [
+                                { name: "Cookies", url: "J3 Cookies.html" },
+                                { name: "Jello", url: "J3 Jello.html" },
+                                { name: "Muffins", url: "J3 Muffins.html" }
+                            ],
+                        }
+                    },
+                    upper: {
+                        name: "Upper Junior",
+                        grades: {
+                            "Junior 4": [
+                                { name: "Milano", url: "J4 milano.html" },
+                                { name: "Geneve", url: "J4 Geneve.html" },
+                                { name: "Florence", url: "J4 Florence.html" }
+                            ],
+                            "Junior 5": [
+                                { name: "Milano", url: "J5 milano.html" },
+                                { name: "Geneve", url: "J5 Geneve.html" },
+                                { name: "Florence", url: "J5 Florence.html" }
+                            ],
+                            "Junior 6": [
+                                { name: "Milano", url: "J6 milano.html" },
+                                { name: "Geneve", url: "J6 Geneve.html" },
+                                { name: "Florence", url: "J6 Florence.html" }
+                            ]
+                        }
+                    }
+                }
+            },
+            middle: {
+                name: "Middle Stage",
+                grades: {
+                    "Middle 1": [...standardClasses],
+                    "Middle 2": [...standardClasses],
+                    "Middle 3": [...standardClasses]
+                }
+            },
+            senior: {
+                name: "Senior Stage",
+                grades: {
+                    "Senior 1": [...standardClasses],
+                    "Senior 2": [...standardClasses],
+                    "Senior 2 Bachelory": [...standardClasses]
+                }
+            }
+        };
+
+        let currentStep = 'stage';
+        let selectedStageKey = null;
+        let selectedSubStageKey = null;
+        let selectedGradeKey = null;
+
+        function selectStage(stageKey) {
+            selectedStageKey = stageKey;
+
+            if (stageKey === 'junior') {
+                document.getElementById('stageSection').classList.add('hidden');
+                document.getElementById('subStageSection').classList.remove('hidden');
+                document.getElementById('backBtn').style.display = 'flex';
+                currentStep = 'subStage';
+            } else {
+                renderGrades(schoolData[stageKey].grades);
+                document.getElementById('stageSection').classList.add('hidden');
+                document.getElementById('gradeSection').classList.remove('hidden');
+                document.getElementById('backBtn').style.display = 'flex';
+                currentStep = 'grade';
+            }
+        }
+
+        function selectSubStage(subStageKey) {
+            selectedSubStageKey = subStageKey;
+            const grades = schoolData.junior.subStages[subStageKey].grades;
+            renderGrades(grades);
+
+            document.getElementById('subStageSection').classList.add('hidden');
+            document.getElementById('gradeSection').classList.remove('hidden');
+            currentStep = 'grade';
+        }
+
+        function renderGrades(grades) {
+            const gradeContainer = document.getElementById('gradeContainer');
+            gradeContainer.innerHTML = '';
+
+            Object.keys(grades).forEach(gradeName => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-card';
+                btn.innerHTML = `<i class="fa-solid fa-book-open"></i> ${gradeName}`;
+                btn.onclick = () => selectGrade(gradeName, grades[gradeName]);
+                gradeContainer.appendChild(btn);
+            });
+        }
+
+        function selectGrade(gradeName, classes) {
+            selectedGradeKey = gradeName;
+
+            const classContainer = document.getElementById('classContainer');
+            classContainer.innerHTML = '';
+
+            classes.forEach(cls => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-card';
+                btn.innerHTML = `<i class="fa-solid fa-door-open"></i> ${cls.name}`;
+                btn.onclick = () => {
+                    window.location.href = encodeURI(cls.url);
+                };
+                classContainer.appendChild(btn);
+            });
+
+            document.getElementById('gradeSection').classList.add('hidden');
+            document.getElementById('classSection').classList.remove('hidden');
+            currentStep = 'class';
+        }
+
+        function goBack() {
+            if (currentStep === 'class') {
+                document.getElementById('classSection').classList.add('hidden');
+                document.getElementById('gradeSection').classList.remove('hidden');
+                currentStep = 'grade';
+            } else if (currentStep === 'grade') {
+                document.getElementById('gradeSection').classList.add('hidden');
+                if (selectedStageKey === 'junior') {
+                    document.getElementById('subStageSection').classList.remove('hidden');
+                    currentStep = 'subStage';
+                } else {
+                    document.getElementById('stageSection').classList.remove('hidden');
+                    document.getElementById('backBtn').style.display = 'none';
+                    currentStep = 'stage';
+                }
+            } else if (currentStep === 'subStage') {
+                document.getElementById('subStageSection').classList.add('hidden');
+                document.getElementById('stageSection').classList.remove('hidden');
+                document.getElementById('backBtn').style.display = 'none';
+                currentStep = 'stage';
+            }
+        }
+    </script>
+</body>
+</html>
